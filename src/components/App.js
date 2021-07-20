@@ -28,7 +28,7 @@ function App() {
 
   const [isInfoTooltip, setIsInfoTooltip] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [data, setData] = useState('');
+  const [data, setData] = useState({ email: ''});
   const history = useHistory();
   const [isInfoTooltipStatus, setIsInfoTooltipStatus] = useState({
     title: "Что-то пошло не так! Попробуйте ещё раз.",
@@ -155,7 +155,7 @@ function App() {
     if (jwt) {
       auth.getContent(jwt)
         .then((res) => {
-          setData(res.data.email)
+          setData({ email: res.data.email})
           setLoggedIn(true)
           history.push("/");
         })
@@ -171,6 +171,8 @@ function App() {
     setLoggedIn(false);
     localStorage.removeItem('jwt');
   }
+
+
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
